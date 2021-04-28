@@ -1,0 +1,90 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  /* border: 1.2px solid #c7c7c7; */
+  height: 100%;
+  background-color: cadetblue;
+  justify-content: space-between;
+  border-left: 1px solid #357bff;
+  border-right: 1px solid #357bff;
+}
+
+.chat__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 55px;
+  background-color: #357bff;
+  color: white;
+  padding: 10px 0;
+}
+
+.chat__header__left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.chat__header__onlineIcon{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #00ff55;
+  margin-right: 10px;
+}
+
+.chat__header__roomName {
+  font-size: 20px;
+  font-weight: 550;
+}
+
+.chat__header__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.chat__header__right .MuiIconButton-root {
+  color: #ffffff;
+}
+
+.chat__body {
+  padding: 10px;
+  background-color: white;
+  flex: 1 1 auto;
+}
+
+.chat__footer {
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  background-color: #357bff;
+  padding: 10px 20px;
+  color: white;
+}
+
+.chat__footer__inputForm {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid white;
+}
+
+.chat__footer__text__input {
+  width: 100%;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  border: none;
+  outline-width: 0;
+  margin-left: 10px;
+}
+
+.chat__footer__inputForm .MuiIconButton-root {
+  color: #ffffff;
+}
