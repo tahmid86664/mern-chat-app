@@ -26,10 +26,20 @@ const Chat = () => {
                 </div>
             </div>
             <div className="chat__body">
-                <div className="message">
-                    <p className="message__senderName">Name</p>
-                    <p className="message__body">text</p>
-                    <span className="message__timestamp">time demo</span>
+                <div className="message__container">
+                    <div className="message">
+                        <p className="message__senderName">Name</p>
+                        <p className="message__body">text ad
+                        asdasdasdasjkdklgnsfklghsdkln fnasklfaklfjd fnaskfjaskldnasfa ajdklasdjaskldjal</p>
+                        <span className="message__timestamp">time demo</span>
+                    </div>
+                </div>
+                <div className="message__container message__sender__container">
+                    <div className="message">
+                        <p className="message__senderName">Name</p>
+                        <p className="message__body">text</p>
+                        <span className="message__timestamp">time demo</span>
+                    </div>
                 </div>
             </div>
             <div className="chat__footer">

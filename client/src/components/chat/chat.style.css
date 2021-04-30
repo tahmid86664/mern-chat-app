@@ -57,6 +57,41 @@
   flex: 1 1 auto;
 }
 
+.message__container {
+  display: flex;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.message__senderName{
+  font-size: 18px;
+  font-weight: 550;
+}
+
+.message__body {
+  width: inherit;
+  white-space: pre-wrap;
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #1660e9;
+  color: white;
+}
+
+.message__timestamp {
+  font-size: 12px;
+  color: #929292;
+}
+
+.message__sender__container {
+  justify-content: flex-end;
+}
+
 .chat__footer {
   display: flex;
   flex-direction: row;
