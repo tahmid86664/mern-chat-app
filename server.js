@@ -3,10 +3,14 @@ const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 
 // custom module
 const router = require('./router');
+
+// schema
+const users = require('./userSchema.js');
 
 // app config
 const app = express();
@@ -28,7 +32,18 @@ app.use(router);
 app.use(cors);
 
 // db config
+const url = 'mongodb+srv://tahmid:TiW4UbBrE076IwDo@cluster0.b9jpc.mongodb.net/mern-chat-app?retryWrites=true&w=majority';
+mongoose.connect(url, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
+const db = mongoose.connection;
+
+db.once('open', () => {
+    console.log('Database is connected');
+})
 
 // socket.io
 io.on('connection', (socket) => {
@@ -47,3 +62,10 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server is listening to ${port}`);
 })
+
+
+
+
+
+
+//TiW4UbBrE076IwDo

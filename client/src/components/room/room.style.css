@@ -1,0 +1,51 @@
+.user__zone__room__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1.2px solid #00ff55;
+} 
+
+.user__zone__room__container > .MuiSvgIcon-root {
+  font-size: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.user__zone__roomInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.user__zone__roomName {
+  font-weight: 550;
+  margin-bottom: 5px;
+}
+
+.user__zone__roomCreator {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.user__zone__roomButtons .MuiIconButton-root {
+  color: red;
+  margin-top: 10px;
+}
+
+.user__zone__roomButtons .MuiIconButton-root:hover {
+  color: #ff7070;
+}
+
+.user__zone__roomButtons .done__button {
+  color: #00ff55;
+}
+
+.user__zone__roomButtons .done__button:hover {
+  color: #a4ffc3;
+}
+
+.user__zone__roomButtons .MuiSvgIcon-root {
+  font-size: 2rem;    
+}
