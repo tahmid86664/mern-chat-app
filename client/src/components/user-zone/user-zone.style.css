@@ -37,7 +37,7 @@
 }
 
 .user__zone__searchInput::placeholder {
- color: white;
+ color: #ffffffa2;;
 }
 
 .user__zone__logoutButton {
@@ -123,6 +123,9 @@
 .user__zone__friends {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    place-content: center;
     width: 100%;
     height: 60%;
     background-color: #357bff;
@@ -133,7 +136,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: fit-content;
     margin: 15px;
+    margin-bottom: 25px;
+    cursor: pointer;
 }
 
 .user__zone__friend__container > .MuiSvgIcon-root {
@@ -166,6 +172,7 @@
     width: 35%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     background-color: #03122e;
     color: white;
     overflow: auto;
@@ -202,9 +209,76 @@
     font-weight: 300;
 }
 
-.user__zone__roomInfo .MuiSvgIcon-root {
-    font-size: 2rem;
+.user__zone__roomButtons .MuiIconButton-root {
     color: red;
     margin-top: 10px;
+}
+
+.user__zone__roomButtons .MuiIconButton-root:hover {
+    color: #ff7070;
+}
+
+.user__zone__roomButtons .done__button {
+    color: #00ff55;
+}
+
+.user__zone__roomButtons .done__button:hover {
+    color: #a4ffc3;
+}
+
+.user__zone__roomButtons .MuiSvgIcon-root {
+    font-size: 2rem;    
+}
+
+.user__zone__createRoom {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.user__zone__createRoom__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    place-content: center;
+    margin: 10px 5px;
+}
+
+.user__zone__createRoom__form__input {
+    width: 90%;
+    padding: 3px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    border: none;
+    border-bottom: 1.2px solid white;
+    outline-width: 0;
+    background-color: transparent;
+    color: white;
+    transition: border-color 0.4s ease;
+}
+
+.user__zone__createRoom__form__input::placeholder {
+    color: #ffffffa2;
+}
+
+.user__zone__createRoom__form__input:focus {
+    border-color: #00ff55;
+}
+
+.user__zone__createRoom__form__button {
+    padding: 10px;
+    background-color: #ffe600;
+    font-size: 14px;
+    font-weight: 550;
+    border: none;
+    outline-width: 0;
+    transition: background-color 1s ease;
+    cursor: pointer;
+}
+
+.user__zone__createRoom__form__button:hover {
+    background-color: #00ff55;
 }
 

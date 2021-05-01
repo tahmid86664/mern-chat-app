@@ -6,6 +6,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SearchIcon from '@material-ui/icons/Search';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { IconButton } from '@material-ui/core';
 
@@ -58,16 +59,39 @@ const UserZone = () => {
                                 </p>
                             </div>
                         </div>
+                        <div className="user__zone__friend__container">
+                            <AccountCircleIcon />
+                            <div className="user__zone__friendInfo">
+                                <p className="user__zone__friendName">Sabu Shikdar</p>
+                                <p className="user__zone__friendStatus">
+                                    <span className={friendState === 'online' ? "user__zone__onlineIcon" : "user__zone__offlineIcon"}></span>
+                                    {friendState}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="user__zone__right">
+                    <div className="user__zone__createRoom">
+                        <form className="user__zone__createRoom__form">
+                            <input className="user__zone__createRoom__form__input" type="text" placeholder="enter room name..." />
+                            <button className="user__zone__createRoom__form__button">create room</button>
+                        </form>
+                    </div>
                     <div className="user__zone__rooms">
                         <div className="user__zone__room__container">
                             <GroupWorkIcon />
                             <div className="user__zone__roomInfo">
                                 <p className="user__zone__roomName">MERN Dev Room</p>
                                 <p className="user__zone__roomCreator">Created by Tahmid Khandokar</p>
-                                <DeleteForeverIcon />
+                                <div className="user__zone__roomButtons">
+                                    <IconButton>
+                                        <DeleteForeverIcon />
+                                    </IconButton>
+                                    <IconButton className="done__button" >
+                                        <DoneOutlineIcon />
+                                    </IconButton>
+                                </div>
                             </div>
                         </div>
                         <div className="user__zone__room__container">
@@ -75,7 +99,14 @@ const UserZone = () => {
                             <div className="user__zone__roomInfo">
                                 <p className="user__zone__roomName">MERN Dev Room</p>
                                 <p className="user__zone__roomCreator">Created by Tahmid Khandokar</p>
-                                <DeleteForeverIcon />
+                                <div className="user__zone__roomButtons">
+                                    <IconButton>
+                                        <DeleteForeverIcon />
+                                    </IconButton>
+                                    <IconButton className="done__button" >
+                                        <DoneOutlineIcon />
+                                    </IconButton>
+                                </div>
                             </div>
                         </div>
                     </div>
