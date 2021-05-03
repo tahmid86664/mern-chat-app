@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 
 import './login.style.css';
 
+import LoginHeader from '../login-header/login-header.component';
+
 const Login = () => {
   const [formActive, setFormActive] = useState('signin');
 
     return (
         <div className="login">
-            <div className="login__header">
-              <div onClick={() => setFormActive('signin')} className="login__header__button">
-                Signin
-              </div>
-              <div onClick={() => setFormActive('signup')} className="login__header__button signup__button">
-                Signup
-              </div>
-            </div>
+            <LoginHeader setFormActive={setFormActive} />
             <div className="login__footer">
               {formActive === 'signin' && 
                 <div className="login__form__container">

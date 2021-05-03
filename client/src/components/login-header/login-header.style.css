@@ -1,0 +1,33 @@
+.login__header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.login__header__button {
+  width: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+  text-align: center;
+  background-color: #357bff;
+  border-left: 1.2px solid #c7c7c7;
+  border-bottom: 2px solid #357bff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+
+.signup__button {
+  background-color: #35d0ff;
+  border-left: none;
+  border-bottom: 2px solid #35d0ff;
+}
+
+.login__header__button:hover{
+  border-bottom: 2px solid #a50844;
+}
+
+.login__header__button:focus{
+  border-bottom: 2px solid #1bcc7a;
+}

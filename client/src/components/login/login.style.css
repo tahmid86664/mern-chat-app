@@ -9,39 +9,6 @@
   box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
-.login__header {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 50px;
-}
-
-.login__header__button {
-  width: 50%;
-  font-size: 20px;
-  font-weight: 600;
-  padding: 10px;
-  text-align: center;
-  background-color: #357bff;
-  border-left: 1.2px solid #c7c7c7;
-  border-bottom: 2px solid #357bff;
-  color: white;
-  cursor: pointer;
-  transition: all 0.5s ease-out;
-}
-
-.signup__button {
-  background-color: #35d0ff;
-  border-left: none;
-  border-bottom: 2px solid #35d0ff;
-}
-
-.login__header__button:hover{
-  border-bottom: 2px solid #a50844;
-}
-
-.login__header__button:focus{
-  border-bottom: 2px solid #1bcc7a;
-}
 
 .login__footer {
   display: flex;
