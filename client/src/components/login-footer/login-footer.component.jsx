@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../../axios/axios';
+import io from 'socket.io-client';
 
 import './login-footer.style.css';
+
+import { useStateValue } from '../../context/StateProvider';
+import { actionTypes } from '../../context/reducer';
+
+let socket;
 
 const LoginFooter = ({ formActive }) => {
   const [name, setName] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  //login data
+  const [logUserName, setLogUserName] = useState('');
+  const [logPassword, setLogPassword] = useState('');
+  const [{}, dispatch] = useStateValue();
+
+  const ENDPOINT = 'localhost:9000';
+
+  useEffect(() => {
+    socket = io(ENDPOINT, {
+      withCredentials: true
+    })
+  }, [ENDPOINT]);
 
   const signUp = async (event) => {
     event.preventDefault();
@@ -32,16 +51,43 @@ const LoginFooter = ({ formActive }) => {
     setConfirmPassword('');
   }
 
+  const signIn = (event) => {
+    event.preventDefault();
+
+    // socket.emit('signin', {logUserName, logPassword}, (err) => {
+    //   console.log(err);
+    // })
+    axios.post('/finduser', {
+      username: logUserName,
+      password: logPassword
+    }).then((res) => {
+      // console.log(res.data);
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: res.data
+      });
+    });
+
+    setLogUserName('');
+    setLogPassword('');
+  }
+
 
   return(
     <div className="login__footer">
       {formActive === 'signin' && 
         <div className="login__form__container">
           <form className="login__form">
-            <input type="text" placeholder="username" className="login__input"/>
-            <input type="password" placeholder="password" className="login__input"/>
+            <input type="text" placeholder="username" className="login__input"
+              value={logUserName}
+              onChange={(e) => setLogUserName(e.target.value)}
+            />
+            <input type="password" placeholder="password" className="login__input"
+              value={logPassword}
+              onChange={(e) => setLogPassword(e.target.value)}
+            />
             <div className="login__button__container">
-              <button className="login__button">Sign in</button>
+              <button onClick={signIn} className="login__button">Sign in</button>
             </div>
           </form>
         </div>

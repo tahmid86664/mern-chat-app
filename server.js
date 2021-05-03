@@ -16,9 +16,11 @@ const users = require('./userSchema.js');
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
-    credentials: true
+    cors: {
+        origin: ["http://localhost:3000"],
+        methods: ["GET", "POST"],
+        credentials: true
+    }
 });
 const port = process.env.PORT || 9000;
 
@@ -29,10 +31,7 @@ const port = process.env.PORT || 9000;
 // middleware
 app.use(express.json());
 app.use(router);
-app.use(cors({
-    credentials: true,
-    origin: ['http://localhost:3000']
-}));
+
 
 // db config
 const url = 'mongodb+srv://tahmid:TiW4UbBrE076IwDo@cluster0.b9jpc.mongodb.net/mern-chat-app?retryWrites=true&w=majority';
@@ -51,6 +50,14 @@ db.once('open', () => {
 // socket.io
 io.on('connection', (socket) => {
     console.log("A connection is occured");
+
+    socket.on('signin', ({logUserName, logPassword}) => {
+        console.log(logUserName, logPassword);
+
+        // if (logUserName && logPassword) {
+        //     socket.emit('signedIn', )
+        // }
+    })
 
     socket.on('disconnect', () => {
         console.log("User is disconnected");
