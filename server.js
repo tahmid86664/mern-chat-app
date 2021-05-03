@@ -29,7 +29,10 @@ const port = process.env.PORT || 9000;
 // middleware
 app.use(express.json());
 app.use(router);
-app.use(cors);
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:3000']
+}));
 
 // db config
 const url = 'mongodb+srv://tahmid:TiW4UbBrE076IwDo@cluster0.b9jpc.mongodb.net/mern-chat-app?retryWrites=true&w=majority';
