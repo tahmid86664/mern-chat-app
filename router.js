@@ -37,10 +37,12 @@ router.post('/finduser', (req, res) => {
     console.log(user);
 
     if (user) {
-        User.findOne({"username": user.username}, (err, data) => {
+        User.findOne({"username": user.username, 
+        "password": user.password}, (err, data) => {
             if (err) {
                 res.status(501).send(err);
             } else {
+                console.log(data);
                 res.status(201).send(data);
             }
         });

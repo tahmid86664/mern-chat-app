@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../axios/axios';
 import io from 'socket.io-client';
+import { useHistory } from "react-router-dom";
 
 import './login-footer.style.css';
 
@@ -21,6 +22,8 @@ const LoginFooter = ({ formActive }) => {
   const [{}, dispatch] = useStateValue();
 
   const ENDPOINT = 'localhost:9000';
+
+  let history = useHistory();
 
   useEffect(() => {
     socket = io(ENDPOINT, {
@@ -61,11 +64,16 @@ const LoginFooter = ({ formActive }) => {
       username: logUserName,
       password: logPassword
     }).then((res) => {
-      // console.log(res.data);
-      dispatch({
-        type: actionTypes.SET_USER,
-        user: res.data
-      });
+      console.log(res.data);
+      if(res.data !== ''){
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: res.data
+        });
+
+        // redirect to zone
+        history.push('/zone');
+      }
     });
 
     setLogUserName('');
