@@ -9,6 +9,9 @@
 }
 
 .user__zone__searchBar {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
   margin-left: 14px;
   height: 40px;
   /* margin-bottom: 15px; */
@@ -20,6 +23,7 @@
 }
 
 .user__zone__searchInput {
+  width: 70%;
   font-size: 14px;
   color: white;
   padding: 5px 10px;
@@ -42,4 +46,20 @@ color: #ffffffa2;;
 
 .user__zone__logoutButton:hover {
   border-color: #00ff55;
+}
+
+.searchRooms {
+  display: none;
+  position: absolute;
+  top: 60px;
+  height: 400px;
+  width: 270px;
+  padding: 10px 20px;
+  background-color: #03122e;
+  color: white;
+  overflow: auto;
+}
+
+.active-searchRooms {
+  display: block;
 }

@@ -5,12 +5,14 @@ import './friends-panel.style.css';
 // component
 import Friend from '../friend/friend.component';
 
-const FriendsPanel = ({ friendState }) => {
+const FriendsPanel = ({ friendState, user }) => {
+  const friends = user.friends;
+  
   return (
     <div className="user__zone__friends">
-      <Friend friendState={friendState} name={'Abu Hossain Dabu'} />
-      <Friend friendState={friendState} name={'Shabu Shikdar'} />
-      <Friend friendState={'online'} name={'Habu Chokidar'} />
+      {friends.length !== 0 ? friends.map(friend => 
+          <Friend friendState={friendState} name={friend.name} />
+      ) : <div></div> }
     </div>
   );
 }

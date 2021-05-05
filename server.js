@@ -51,12 +51,14 @@ db.once('open', () => {
 io.on('connection', (socket) => {
     console.log("A connection is occured");
 
-    socket.on('signin', ({logUserName, logPassword}) => {
-        console.log(logUserName, logPassword);
+    socket.on('zone-in', ({user}, callback) => {
+        console.log(user);
 
-        // if (logUserName && logPassword) {
-        //     socket.emit('signedIn', )
-        // }
+        user.friends.map(friend => {
+            // console.log(`broadcasting to ${friend.username}`);
+            socket.broadcast.to(friend.username)
+        });
+
     })
 
     socket.on('disconnect', () => {

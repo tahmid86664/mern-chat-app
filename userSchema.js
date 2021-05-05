@@ -8,6 +8,8 @@ const userSchema = mongoose.Schema({
   createdRooms: [{
     id: String,
     name: String,
+    creatorName: String,
+    creatorUsername: String,
     members: [{
       id: String,
       name: String,
@@ -24,6 +26,7 @@ const userSchema = mongoose.Schema({
   joinedRooms: [{
     id: String,
     name: String,
+    creatorName: String,
     creatorUsername: String,
     members: [{
       id: String,

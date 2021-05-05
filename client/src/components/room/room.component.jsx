@@ -8,7 +8,17 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import { IconButton } from '@material-ui/core';
 
-const Room = ({ roomName, creator }) => {
+import axios from '../../axios/axios';
+
+const Room = ({ id, roomName, creator, isFromSearch }) => {
+
+  const deleteRoom = () => {
+    axios.get(`/delete/room/${creator}/${id}`);
+  }
+  
+  const joinRoom = () => {
+    console.log('Joining room');
+  }
   return (
     <div className="user__zone__room__container">
       <GroupWorkIcon />
@@ -16,12 +26,24 @@ const Room = ({ roomName, creator }) => {
         <p className="user__zone__roomName">{roomName}</p>
         <p className="user__zone__roomCreator">Created by {creator}</p>
         <div className="user__zone__roomButtons">
-          <IconButton>
-            <DeleteForeverIcon />
-          </IconButton>
-          <IconButton className="done__button" >
-            <DoneOutlineIcon />
-          </IconButton>
+          {!isFromSearch ? (
+            <div>
+              <IconButton onClick={deleteRoom}>
+                <DeleteForeverIcon />
+              </IconButton>
+              <IconButton className="done__button" >
+                <DoneOutlineIcon />
+              </IconButton>
+            </div>
+          ) : (
+            <div>
+              <button 
+                className="user__zone__joinRoomButton" 
+                type="submit"
+                onClick={joinRoom}
+              >Join</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
