@@ -15,13 +15,6 @@ const userSchema = mongoose.Schema({
       name: String,
       username: String
     }],
-    messages: [{
-      id: String,
-      senderName: String,
-      senderUsername: String,
-      text: String,
-      timestamp: String
-    }]
   }],
   joinedRooms: [{
     id: String,
@@ -33,13 +26,6 @@ const userSchema = mongoose.Schema({
       name: String,
       username: String
     }],
-    messages: [{
-      id: String,
-      senderName: String,
-      senderUsername: String,
-      text: String,
-      timestamp: String
-    }]
   }],
   friends: [{
     id: String,

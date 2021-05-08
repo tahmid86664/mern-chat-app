@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import io from 'socket.io-client';
 import queryString from 'query-string';
+import axios from '../../axios/axios';
 
 import './chat.style.css';
 
@@ -15,7 +16,6 @@ import { useStateValue } from '../../context/StateProvider';
 // components
 import Messages from '../messages/messages.component';
 
-let socket;
 
 // Gneral Focus Hook
 const useFocus = () => {
@@ -26,6 +26,8 @@ const useFocus = () => {
 }
 
 
+let socket;
+
 const Chat = ({ location }) => {
     const ENDPOINT = 'localhost:9000';
     const [inputRef, setInputFocus] = useFocus(); // for autometically set cursor after submitting input every time
@@ -33,6 +35,8 @@ const Chat = ({ location }) => {
     const [roomId, setRoomId] = useState('');
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
+
+    const [{user}] = useStateValue();
 
 
     useEffect(() => {
@@ -49,7 +53,12 @@ const Chat = ({ location }) => {
         console.log(username, roomId);
 
         socket.emit('join', {username, roomId}, (err) => {
-            console.log(err);
+            if(err) {
+                console.log(err);
+            }
+            axios.get(`/find/messages/${roomId}`).then((res) => {
+                setMessages(res.data);
+            });
         });
 
 
@@ -60,10 +69,17 @@ const Chat = ({ location }) => {
         }
     }, [location, ENDPOINT]);
 
+    // useEffect(() => {
+    //     axios.get(`/find/messages/${roomId}`).then((res) => {
+    //         setMessages([...messages, res.data]);
+    //     });
+    // });
+
     useEffect(() => {
         socket.on('message', (message, callback) => {
             setMessages([...messages, message]);
         });
+
     }, [messages]);
 
 
@@ -71,11 +87,18 @@ const Chat = ({ location }) => {
         event.preventDefault();
 
         if (message) {
-            console.log(message);
             socket.emit('sendMessage', message, roomId, username, () => {
+                axios.post('/add/message', {
+                    roomId: roomId,
+                    senderName: user.name,
+                    senderUsername: username,
+                    text: message,
+                    timestamp: new Date().toLocaleString()
+                });
+
                 setMessage('');
             });
-        }
+        }       
     }
 
     useEffect(() => {

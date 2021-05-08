@@ -3,6 +3,7 @@ const cors = require('cors');
 
 // schema
 const User = require('./userSchema');
+const Messages = require('./messageSchema');
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.post('/adduser', (req, res) => {
     if (user) {
         User.create(user, (err, data) => {
             if (err) {
-                res.status(501).send(err);
+                res.status(500).send(err);
             } else {
                 res.status(201).send(data);
             }
@@ -40,7 +41,7 @@ router.post('/finduser', (req, res) => {
         User.findOne({"username": user.username, 
         "password": user.password}, (err, data) => {
             if (err) {
-                res.status(501).send(err);
+                res.status(500).send(err);
             } else {
                 console.log(data);
                 res.status(201).send(data);
@@ -57,7 +58,7 @@ router.post('/createroom', (req, res) => {
             {$push: {createdRooms: room}}, 
             (err, data) => {
                 if (err) {
-                    res.status(501).send(err);
+                    res.status(500).send(err);
                 } else {
                     res.status(201).send(data);
                 }
@@ -71,7 +72,7 @@ router.get('/find/createdroom/:username', (req, res) => {
     if (username) {
         User.findOne({"username": username}, (err, data) => {
             if (err) {
-                res.status(501).send(err);
+                res.status(500).send(err);
             } else {
                 res. status(201).send(data.createdRooms);
             }
@@ -89,7 +90,7 @@ router.get('/delete/room/:username/:roomId', (req, res) => {
         {$pull: {createdRooms: {"_id": roomId}}}, 
         (err, data) => {
             if (err) {
-                res.status(501).send(data);
+                res.status(500).send(data);
             } else {
                 res.status(201).send(data);
             }
@@ -101,7 +102,7 @@ router.get('/delete/room/:username/:roomId', (req, res) => {
 router.get('/find/allroom', (req, res) => {
     User.find((err, data) => {
         if (err) {
-            res.status(501).send(err);
+            res.status(500).send(err);
         } else {
             let allroom = [];
             data.map(user => user.createdRooms.map(room => allroom.push(room)));
@@ -110,6 +111,58 @@ router.get('/find/allroom', (req, res) => {
         }
     })
 });
+
+
+router.post('/add/message/:username/:roomId', (req, res) => {
+    const username = req.params.username;
+    const roomId = req.params.roomId;
+
+    const message = req.body;
+    console.log(message, username, roomId);
+
+    if ( username && roomId ) {
+        User.updateOne({"username": username, "createdRooms._id": roomId}, 
+        {$push: {"createdRooms.$.messages": message}},
+        (err, data) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(201).send(data);
+            }
+        })
+    }
+});
+
+
+router.post('/add/message', (req, res) => {
+    const message = req.body;
+    console.log(message);
+
+    if ( message ) {
+        Messages.create(message, (err, data) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(201).send(data);
+            }
+        })
+    }
+});
+
+
+router.get('/find/messages/:roomId', (req, res) => {
+    const roomId = req.params.roomId;
+
+    if (roomId) {
+        Messages.find({"roomId": roomId}, (err, data) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(201).send(data);
+            }
+        })
+    }
+})
 
 
 module.exports = router;
