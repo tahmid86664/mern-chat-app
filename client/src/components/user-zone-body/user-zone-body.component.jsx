@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 
 import './user-zone-body.style.css';
 
@@ -10,25 +11,25 @@ import RoomPanel from '../room-panel/room-panel.component';
 import { useStateValue } from '../../context/StateProvider';
 
 // socket
-import io from 'socket.io-client';
-import { useState } from 'react';
-let socket;
+// import io from 'socket.io-client';
+
+// let socket;
 
 const UserZoneBody = ({ userState, friendState, setUserState, setFriendState }) => {
   const [{user}, dispatch] = useStateValue();
   const [friendsUsername, setFriendsUsername] = useState([]);
   
-  const ENDPOINT = 'localhost:9000';
+  // const ENDPOINT = 'localhost:9000';
 
-  useEffect(() => {
-    socket = io(ENDPOINT, {
-      withCredentials: true
-    });
+  // useEffect(() => {
+  //   socket = io(ENDPOINT, {
+  //     withCredentials: true
+  //   });
 
-    socket.emit('zone-in', { user }, (err) => {
-      console.log(err);
-    })
-  }, [ENDPOINT, user]);
+  //   socket.emit('zone-in', { user }, (err) => {
+  //     console.log(err);
+  //   })
+  // }, [ENDPOINT, user]);
 
   return (
     <div className="user__zone__body">

@@ -51,15 +51,32 @@ db.once('open', () => {
 io.on('connection', (socket) => {
     console.log("A connection is occured");
 
-    socket.on('zone-in', ({user}, callback) => {
-        console.log(user);
+    // socket.on('zone-in', ({user}, callback) => {
+    //     console.log(user);
 
-        user.friends.map(friend => {
-            // console.log(`broadcasting to ${friend.username}`);
-            socket.broadcast.to(friend.username)
-        });
+    //     user.friends.map(friend => {
+    //         // console.log(`broadcasting to ${friend.username}`);
+    //         socket.broadcast.to(friend.username)
+    //     });
 
-    })
+    // })
+
+    socket.on('join', ({ username, roomId }, callback) => {
+        console.log(`${username} has just joined in ${roomId}`);
+
+        socket.emit('message', { senderUsername: '', text:`Hello ${username}! Welcome to the room ${roomId}!` })
+        socket.broadcast.to(roomId).emit('message', { senderUsername: '', text: `${username} has just joined!` })
+    
+        socket.join(roomId);
+
+        callback();
+    });
+
+    socket.on('sendMessage', (message, roomId, username, callback) => {
+        io.to(roomId).emit('message', {senderUsername: username, text: message});
+
+        callback();
+    });
 
     socket.on('disconnect', () => {
         console.log("User is disconnected");

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './room.style.css';
 
@@ -11,6 +12,8 @@ import { IconButton } from '@material-ui/core';
 import axios from '../../axios/axios';
 
 const Room = ({ id, roomName, creator, isFromSearch }) => {
+  let history = useHistory();
+
 
   const deleteRoom = () => {
     axios.get(`/delete/room/${creator}/${id}`);
@@ -19,6 +22,12 @@ const Room = ({ id, roomName, creator, isFromSearch }) => {
   const joinRoom = () => {
     console.log('Joining room');
   }
+
+  const enterRoom = () => {
+    console.log('entering room');
+    history.push(`/chat?username=${creator}&roomId=${id}`);
+  }
+
   return (
     <div className="user__zone__room__container">
       <GroupWorkIcon />
@@ -31,7 +40,7 @@ const Room = ({ id, roomName, creator, isFromSearch }) => {
               <IconButton onClick={deleteRoom}>
                 <DeleteForeverIcon />
               </IconButton>
-              <IconButton className="done__button" >
+              <IconButton className="done__button" onClick={enterRoom} >
                 <DoneOutlineIcon />
               </IconButton>
             </div>
