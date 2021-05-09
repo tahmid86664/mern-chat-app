@@ -33,6 +33,7 @@ const Chat = ({ location }) => {
     const [inputRef, setInputFocus] = useFocus(); // for autometically set cursor after submitting input every time
     const [username, setUsername] = useState('');
     const [roomId, setRoomId] = useState('');
+    const [roomName, setRoomName] = useState('');
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
 
@@ -40,7 +41,7 @@ const Chat = ({ location }) => {
 
 
     useEffect(() => {
-        const {username, roomId} = queryString.parse(location.search);
+        const {username, roomId, roomName} = queryString.parse(location.search);
         console.log(queryString.parse(location.search));
 
         socket = io(ENDPOINT, {
@@ -49,6 +50,7 @@ const Chat = ({ location }) => {
 
         setUsername(username);
         setRoomId(roomId);
+        setRoomName(roomName);
 
         console.log(username, roomId);
 
@@ -102,7 +104,7 @@ const Chat = ({ location }) => {
     }
 
     useEffect(() => {
-        setInputFocus();
+        setInputFocus(); // for autometically set cursor after submitting input every time
     })
 
     console.log(messages);
@@ -112,7 +114,7 @@ const Chat = ({ location }) => {
             <div className="chat__header">
                 <div className="chat__header__left">
                     <div className="chat__header__onlineIcon"></div>
-                    <p className="chat__header__roomName">Room Name</p>
+                    <p className="chat__header__roomName">{roomName}</p>
                 </div>
                 <div className="chat__header__right">
                     <Link to="/zone" >

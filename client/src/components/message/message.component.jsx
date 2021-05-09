@@ -17,9 +17,9 @@ const Message = ({ message: {senderUsername, text}, username }) => {
 
       <div className="message__container message__sender__container">
         <div className="message">
-          <p className="message__senderName">{username}</p>
+          <p className="message__senderName message__senderName__right">{username}</p>
           <p className="message__body">{text}</p>
-          <span className="message__timestamp">time demo</span>
+          <span className="message__timestamp message__timestamp__right">time demo</span>
         </div>
       </div>
     ) : (

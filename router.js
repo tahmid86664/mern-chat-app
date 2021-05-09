@@ -112,7 +112,25 @@ router.get('/find/allroom', (req, res) => {
     })
 });
 
+router.get('/find/allusers', (req, res) => {
+    User.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            let alluser = [];
+            data.map(user => alluser.push({
+                "id": user._id,
+                "name": user.name,
+                "username": user.username
+            }));
+            // console.log(allroom);
+            res.status(201).send(alluser);
+        }
+    })
+});
 
+
+// not using the folling one
 router.post('/add/message/:username/:roomId', (req, res) => {
     const username = req.params.username;
     const roomId = req.params.roomId;
@@ -160,9 +178,56 @@ router.get('/find/messages/:roomId', (req, res) => {
             } else {
                 res.status(201).send(data);
             }
-        })
+        });
     }
-})
+});
 
+router.post('/add/joinedroom/:roomId/:username', (req, res) => {
+    const roomId = req.params.roomId;
+    const username = req.params.username;
+
+    const joinedRoom = req.body;
+
+    const member = {
+        "username": username
+    }
+
+    console.log(roomId, username, joinedRoom, member);
+
+    if ( joinedRoom && roomId && username ) {
+        User.updateOne({"username": username}, 
+        {$push: {joinedRooms: joinedRoom}},
+        (err, data) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                User.updateOne({"username": joinedRoom.creatorUsername, "createdRooms._id": roomId},
+                {$push: {"createdRooms.$.members": member}},
+                (err1, data1) => {
+                    if (err1) {
+                        res.status(500).send(err1);
+                    } else {
+                        res.status(201).send(data1);
+                    }
+                })
+                // res.status(201).send(data);
+            }
+        });
+    }
+});
+
+router.get('/find/joinedrooms/:username', (req, res) => {
+    const username = req.params.username;
+
+    if (username) {
+        User.findOne({"username": username}, (err, data) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res. status(201).send(data.joinedRooms);
+            }
+        });
+    }
+});
 
 module.exports = router;

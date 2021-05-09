@@ -67,11 +67,17 @@
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  justify-content:right;
 }
 
 .message__senderName{
+  display: flex;
   font-size: 18px;
   font-weight: 550;
+}
+
+.message__senderName__right {
+  justify-content: flex-end;
 }
 
 .message__body {
@@ -86,8 +92,13 @@
 }
 
 .message__timestamp {
+  display: flex;
   font-size: 12px;
   color: #929292;
+}
+
+.message__timestamp__right {
+  justify-content: flex-end;
 }
 
 .message__sender__container {

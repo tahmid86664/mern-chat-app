@@ -39,13 +39,13 @@ mongoose.connect(url, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
+});
 
 const db = mongoose.connection;
 
 db.once('open', () => {
     console.log('Database is connected');
-})
+});
 
 // socket.io
 io.on('connection', (socket) => {

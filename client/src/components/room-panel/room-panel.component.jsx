@@ -18,6 +18,12 @@ const RoomPanel = () => {
       setCreatedRooms(res.data);
     });
   });
+
+  useEffect(() => {
+    axios.get(`/find/joinedrooms/${user.username}`).then(res => {
+      setJoinedRooms(res.data);
+    });
+  });
   
 
   return (
@@ -29,7 +35,7 @@ const RoomPanel = () => {
       <br />
       <br />
       {joinedRooms ? joinedRooms.map(room => 
-        <Room key={room._id} roomName={room.name} creator={room.creatorUsername} />
+        <Room key={room.roomId} roomName={room.name} creator={room.creatorUsername} id={room.roomId} />
       ) : (<div></div>)
       }
       {/* <Room roomName={'MERN Dev Room'} creator={'Tahmid Khandokar'} />

@@ -6,34 +6,25 @@ const userSchema = mongoose.Schema({
   password: String,
   status: String,
   createdRooms: [{
-    id: String,
     name: String,
     creatorName: String,
     creatorUsername: String,
     members: [{
-      id: String,
       name: String,
       username: String
     }],
   }],
   joinedRooms: [{
-    id: String,
     name: String,
+    roomId: String,
     creatorName: String,
-    creatorUsername: String,
-    members: [{
-      id: String,
-      name: String,
-      username: String
-    }],
+    creatorUsername: String
   }],
   friends: [{
-    id: String,
     name: String,
     username: String,
     status: String,
     messages: [{
-      id: String,
       senderName: String,
       senderUsername: String,
       text: String,

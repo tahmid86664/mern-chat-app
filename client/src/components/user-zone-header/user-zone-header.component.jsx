@@ -11,10 +11,12 @@ import { useHistory } from 'react-router-dom';
 import axios from '../../axios/axios';
 
 import Room from '../room/room.component';
+import SearchUser from '../search-user/search-user.component';
 
 const UserZoneHeader = () => {
-  const [user, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
   const [allRoom, setAllRoom] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
   let history = useHistory();
@@ -34,8 +36,18 @@ const UserZoneHeader = () => {
     });
   });
 
+  useEffect(() => {
+    axios.get('/find/allusers').then(res => {
+      setAllUsers(res.data);
+    });
+  });
+
   const filteredRooms = allRoom.filter(room => 
     room.name.toLowerCase().includes(searchInput.toLowerCase())  
+  );
+
+  const filteredUsers = allUsers.filter(searchUser => 
+    searchUser.name.toLowerCase().includes(searchInput.toLowerCase()) && searchUser.username !== user.username
   );
 
   return (
@@ -53,8 +65,24 @@ const UserZoneHeader = () => {
         </IconButton> 
         <div className={searchInput === '' ? "searchRooms" : "searchRooms active-searchRooms"}>
           {filteredRooms.map(room => 
-            <Room key={room._id} id={room._id} roomName={room.name} creator={room.creatorUsername} isFromSearch={true} />  
+            <Room 
+              key={room._id} id={room._id} 
+              roomName={room.name} 
+              creator={room.creatorUsername} 
+              isFromSearch={true} 
+              setSearchInput={setSearchInput} 
+            />  
           )}
+          {
+            filteredUsers.map(user => 
+              <SearchUser 
+                key={user.id}
+                name={user.name}
+                username={user.username}
+                setSearchInput={setSearchInput} 
+              />
+            )
+          }
         </div>         
       </div>
       <div className="user__zone__logoutButton" onClick={logout}>
