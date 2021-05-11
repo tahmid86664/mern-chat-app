@@ -27,6 +27,8 @@ const UserZoneHeader = () => {
       user: null
     });
 
+    localStorage.removeItem('user');
+
     history.push('/'); // to redirect to home
   }
 

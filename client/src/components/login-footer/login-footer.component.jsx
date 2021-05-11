@@ -70,6 +70,7 @@ const LoginFooter = ({ formActive }) => {
           type: actionTypes.SET_USER,
           user: res.data
         });
+        localStorage.setItem('user', JSON.stringify(res.data));
 
         // redirect to zone
         history.push('/zone');
